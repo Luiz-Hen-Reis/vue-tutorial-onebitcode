@@ -1,11 +1,5 @@
-<script>
+<script setup>
 import CompositionApi from "./components/CompositionApi.vue";
-
-export default {
-  components: {
-    CompositionApi,
-  },
-};
 </script>
 
 <template>
