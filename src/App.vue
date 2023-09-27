@@ -1,9 +1,16 @@
 <script setup>
-import Composition from "./components/CompositionApi.vue";
+import { ref } from "vue";
+import Profile from "./components/Profile.vue";
+
+const isOpen = ref(true);
 </script>
 
 <template>
-  <Composition />
+  <input type="checkbox" v-model="isOpen" />
+  <Profile v-if="isOpen"
+    >Github User Data
+    <template v-slot:footer>Desenvolvido por Luiz-Hen-Reis</template>
+  </Profile>
 </template>
 
 <style>
@@ -13,62 +20,5 @@ import Composition from "./components/CompositionApi.vue";
   max-width: 40rem;
   margin: 0 auto;
   text-align: center;
-}
-
-img {
-  border: 1px solid #e5e5e5;
-  border-radius: 999px;
-  display: block;
-  margin: 1rem auto;
-  width: 8rem;
-  height: 8rem;
-}
-
-h1,
-h2 {
-  color: #f64348;
-  margin: 1rem auto 0.25rem;
-}
-
-h3 {
-  margin: 1rem auto 0.25rem;
-}
-
-span {
-  display: block;
-  margin: 1rem auto;
-}
-
-input,
-button {
-  max-width: 20rem;
-  padding: 0.5rem;
-}
-
-input {
-  background-color: #1c1a1d;
-  border: 1px solid #f64348;
-  border-radius: 0.25rem;
-  color: #e5e5e5;
-  margin: 1rem 1rem 1rem 0;
-}
-
-button {
-  background-color: #f64348;
-  border: unset;
-  border-radius: 0.25rem;
-  color: #1c1a1d;
-  font-size: 1rem;
-  font-weight: 700;
-  text-transform: uppercase;
-}
-
-button:hover {
-  cursor: pointer;
-  filter: brightness(0.95);
-}
-
-a {
-  color: #f64348;
 }
 </style>
