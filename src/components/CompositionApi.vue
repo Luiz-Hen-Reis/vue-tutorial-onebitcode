@@ -12,7 +12,9 @@ const state = reactive({
   repos: [],
 });
 
-async function fetchGithubUser() {
+async function fetchGithubUser(ev) {
+  ev.preventDefault();
+
   const res = await fetch(`https://api.github.com/users/${searchInput.value}`);
   const { login, name, bio, company, avatar_url } = await res.json();
 
@@ -41,8 +43,10 @@ const countReposMessage = computed(() => {
 
 <template>
   <h1>GitHub User Data</h1>
-  <input type="text" v-model="searchInput" />
-  <button @click="fetchGithubUser">Carregar Usuário</button>
+  <form @submit="fetchGithubUser">
+    <input type="text" v-model="searchInput" />
+    <button>Carregar Usuário</button>
+  </form>
   <div v-if="state.login !== ''">
     <img :src="state.avatar_url" />
     <strong>@{{ state.login }}</strong>
