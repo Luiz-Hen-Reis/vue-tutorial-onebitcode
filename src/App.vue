@@ -1,10 +1,9 @@
 <script setup>
-import CompositionApi from "./components/CompositionApi.vue";
+import Composition from "./components/CompositionApi.vue";
 </script>
 
 <template>
-  <OptionsApi />
-  <CompositionApi />
+  <Composition />
 </template>
 
 <style>
