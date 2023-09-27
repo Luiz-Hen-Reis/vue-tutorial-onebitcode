@@ -7,17 +7,6 @@ import Composition from "./components/CompositionApi.vue";
 </template>
 
 <style>
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  background-color: #1c1a1d;
-  color: #e5e5e5;
-}
-
 #app {
   font-family: "Ubuntu", sans-serif;
   min-height: 100vh;

@@ -1,5 +1,7 @@
 <script setup>
-import { reactive } from "vue";
+import { computed, reactive, ref } from "vue";
+
+const searchInput = ref("");
 
 const state = reactive({
   login: "",
@@ -8,11 +10,10 @@ const state = reactive({
   company: "",
   avatar_url: "",
   repos: [],
-  searchInput: "",
 });
 
 async function fetchGithubUser() {
-  const res = await fetch(`https://api.github.com/users/${state.searchInput}`);
+  const res = await fetch(`https://api.github.com/users/${searchInput.value}`);
   const { login, name, bio, company, avatar_url } = await res.json();
 
   state.login = login;
@@ -30,11 +31,17 @@ async function fetchUserRepositories(username) {
 
   state.repos = repos;
 }
+
+const countReposMessage = computed(() => {
+  return state.repos.length > 0
+    ? `${state.name} possui ${state.repos.length} repositórios públicos.`
+    : `${state.name} não possui nenhum repositório público.`;
+});
 </script>
 
 <template>
   <h1>GitHub User Data</h1>
-  <input type="text" v-model="state.searchInput" />
+  <input type="text" v-model="searchInput" />
   <button @click="fetchGithubUser">Carregar Usuário</button>
   <div v-if="state.login !== ''">
     <img :src="state.avatar_url" />
@@ -45,6 +52,7 @@ async function fetchUserRepositories(username) {
   </div>
 
   <section v-if="state.repos.length > 0">
+    <h2>{{ countReposMessage }}</h2>
     <article v-for="repo of state.repos">
       <h3>{{ repo.full_name }}</h3>
       <p>{{ repo.description }}</p>
